@@ -71,7 +71,7 @@ async function run() {
           .json({ message: "Server error while fetching courses" });
       }
     });
-    app.get("/courses/:id", async (req, res) => {
+    app.get("/courses/:id", validateToken, async (req, res) => {
       const courseId = req.params.id;
       const query = { _id: new ObjectId(courseId) };
       const result = await courseCollection.findOne(query);
